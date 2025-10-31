@@ -307,6 +307,7 @@
     <Compile Include="Harmony\FoodUtility_ThoughtsFromIngesting.cs" />
     <Compile Include="Harmony\HarmonyInstance.cs" />
     <Compile Include="Harmony\HediffComp_SeverityFromGas_CompPostTick.cs" />
+    <Compile Include="Harmony\IncidentWorker_RaidEnemy_GenerateRaidLoot.cs" />
     <Compile Include="Harmony\SocialInteractionUtility_IsGoodPositionForInteraction.cs" />
     <Compile Include="Harmony\InteractionWorker_Interacted.cs" />
     <Compile Include="Harmony\MentalStateHandler_TryStartMentalState.cs" />

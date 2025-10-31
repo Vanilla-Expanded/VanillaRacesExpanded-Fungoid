@@ -11,7 +11,7 @@ namespace VanillaRacesExpandedFungoid
     public class VanillaRacesExpandedFungoid_Settings : ModSettings
 
     {
-
+        public static bool fungoidApocalypse = false;
         public static float infectionChance = baseInfectionChance;
         public const float baseInfectionChance = 0.2f;
 
@@ -19,6 +19,8 @@ namespace VanillaRacesExpandedFungoid
         {
             base.ExposeData();
             Scribe_Values.Look(ref infectionChance, "infectionChance", baseInfectionChance);
+            Scribe_Values.Look(ref fungoidApocalypse, "fungoidApocalypse", false);
+
         }
 
         public static void DoWindowContents(Rect inRect)
@@ -36,6 +38,7 @@ namespace VanillaRacesExpandedFungoid
             {
                 infectionChance = baseInfectionChance;
             }
+            ls.CheckboxLabeled("VRE_FungoidApocalypse".Translate(), ref fungoidApocalypse, "VRE_FungoidApocalypseDesc".Translate());
 
 
             ls.End();
