@@ -53,7 +53,7 @@ namespace VanillaRacesExpandedFungoid
                 StaticCollectionsClass.pawns_and_xenotypes.Clear();
 
 
-                foreach (Pawn pawn in map.mapPawns.FreeColonistsSpawned)
+                foreach (Pawn pawn in map.mapPawns.FreeColonistsSpawned.ToList())
                 {
                     if (pawn.genes?.HasActiveGene(InternalDefOf.VRE_MindCoalescence)==true)
                     {
