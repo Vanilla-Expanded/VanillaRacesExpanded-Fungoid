@@ -20,13 +20,20 @@ namespace VanillaRacesExpandedFungoid
         [HarmonyPostfix]
         static void VomitIfFungoid(Pawn initiator, Pawn recipient)
         {
-            if (initiator.genes?.HasActiveGene(InternalDefOf.VRE_Repulsive) == true && recipient.genes?.HasActiveGene(InternalDefOf.VRE_Repulsive) == false)
+            if (Rand.Chance(0.2f))
             {
-                recipient.jobs.StartJob(JobMaker.MakeJob(JobDefOf.Vomit), JobCondition.InterruptForced, null, resumeCurJobAfterwards: true);
-            }else if (initiator.genes?.HasActiveGene(InternalDefOf.VRE_Repulsive) == false && recipient.genes?.HasActiveGene(InternalDefOf.VRE_Repulsive) == true)
-            {
-                initiator.jobs.StartJob(JobMaker.MakeJob(JobDefOf.Vomit), JobCondition.InterruptForced, null, resumeCurJobAfterwards: true);
+                if (initiator.genes?.HasActiveGene(InternalDefOf.VRE_Repulsive) == true && recipient.genes?.HasActiveGene(InternalDefOf.VRE_Repulsive) == false)
+                {
+                    recipient.jobs.StartJob(JobMaker.MakeJob(JobDefOf.Vomit), JobCondition.InterruptForced, null, resumeCurJobAfterwards: true);
+                    MoteMaker.ThrowText(recipient.Position.ToVector3(), recipient.Map, "VRE_TextMote_RepulsiveColonist".Translate(), 6f);
+                }
+                else if (initiator.genes?.HasActiveGene(InternalDefOf.VRE_Repulsive) == false && recipient.genes?.HasActiveGene(InternalDefOf.VRE_Repulsive) == true)
+                {
+                    initiator.jobs.StartJob(JobMaker.MakeJob(JobDefOf.Vomit), JobCondition.InterruptForced, null, resumeCurJobAfterwards: true);
+                    MoteMaker.ThrowText(initiator.Position.ToVector3(), initiator.Map, "VRE_TextMote_RepulsiveColonist".Translate(), 6f);
+                }
             }
+            
 
         }
     }
