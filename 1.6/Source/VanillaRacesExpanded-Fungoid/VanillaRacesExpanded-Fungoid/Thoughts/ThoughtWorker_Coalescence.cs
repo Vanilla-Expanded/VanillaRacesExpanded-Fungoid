@@ -23,7 +23,7 @@ namespace VanillaRacesExpandedFungoid
 
         public override float MoodMultiplier(Pawn pawn)
         {
-            if (StaticCollectionsClass.xenotypesAndMood.ContainsKey(StaticCollectionsClass.pawns_and_xenotypes[pawn]))
+            if (StaticCollectionsClass.pawns_and_xenotypes.ContainsKey(pawn)&&StaticCollectionsClass.xenotypesAndMood.ContainsKey(StaticCollectionsClass.pawns_and_xenotypes[pawn]))
             {
 
                 return (StaticCollectionsClass.xenotypesAndMood[StaticCollectionsClass.pawns_and_xenotypes[pawn]]) / 5;
