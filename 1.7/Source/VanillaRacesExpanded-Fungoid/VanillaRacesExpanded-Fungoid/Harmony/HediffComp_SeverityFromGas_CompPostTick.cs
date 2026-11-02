@@ -19,25 +19,32 @@ namespace VanillaRacesExpandedFungoid
         {
             var codes = codeInstructions.ToList();
             var check = AccessTools.Method(typeof(VanillaRacesExpandedFungoid_HediffComp_SeverityFromGas_CompPostTick_Patch), "GeneNumberModifier");
+            var patched = false;
            
             for (var i = 0; i < codes.Count; i++)
             {
                 yield return codes[i];
-                if (i > 0 && codes[i].opcode == OpCodes.Stloc_1 && codes[i - 1].opcode == OpCodes.Mul)
+                if (!patched && i > 0 && codes[i].opcode == OpCodes.Stloc_1 && codes[i - 1].opcode == OpCodes.Mul)
                 {
                     yield return new CodeInstruction(OpCodes.Ldloc_0);
+                    yield return new CodeInstruction(OpCodes.Ldarg_0);
                     yield return new CodeInstruction(OpCodes.Call, check);
                     yield return new CodeInstruction(OpCodes.Ldloc_1);
                     yield return new CodeInstruction(OpCodes.Mul);
                     yield return new CodeInstruction(OpCodes.Stloc_1);
+
+                    patched = true;
                 }
             }
+
+            if (!patched)
+                Log.Error("[VRE-Fungoid] Failed to apply patch for Partial Antirot Lungs gene, it will not work.");
         }
 
 
-        public static float GeneNumberModifier(Pawn pawn)
+        public static float GeneNumberModifier(Pawn pawn, HediffComp_SeverityFromGas comp)
         {
-            if (pawn.HasActiveGene(InternalDefOf.VRE_PartialAntirotLungs))
+            if (comp.Def == HediffDefOf.LungRotExposure && pawn.HasActiveGene(InternalDefOf.VRE_PartialAntirotLungs))
             {
                 return 0.5f;
             }
