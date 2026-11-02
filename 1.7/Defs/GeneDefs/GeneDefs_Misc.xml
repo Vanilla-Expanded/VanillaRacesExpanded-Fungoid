@@ -10,6 +10,17 @@
 		<displayOrderInCategory>5000</displayOrderInCategory>
 		<biostatCpx>1</biostatCpx>
 		<biostatMet>1</biostatMet>
+		<modExtensions>
+			<li Class="VEF.Genes.GeneExtension">
+				<foodTypesTreatedAsHumanMeat>
+					<!-- List of FoodTypeFlags -->
+					<li>
+						<!-- List of flags applied to this specific entry. -->
+						<li>Fungus</li>
+					</li>
+				</foodTypesTreatedAsHumanMeat>
+			</li>
+		</modExtensions>
 	</GeneDef>
 	<GeneDef>
 		<defName>VRE_Telepathy</defName>
